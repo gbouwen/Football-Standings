@@ -1,11 +1,13 @@
 package com.standings.android.adapters
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.standings.android.R
 import com.standings.android.model.LeagueData
 
@@ -24,7 +26,10 @@ class LeagueAdapter(private val list: List<LeagueData>) : RecyclerView.Adapter<L
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-//        holder.imageView TODO set imageView to logo
+        Glide.with(holder.itemView.context)
+            .load(Uri.parse(item.logos.light))
+            .placeholder(R.drawable.default_logo)
+            .into(holder.imageView)
         holder.textView.text = item.name
     }
 
