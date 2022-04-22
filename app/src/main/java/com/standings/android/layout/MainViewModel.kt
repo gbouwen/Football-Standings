@@ -1,4 +1,4 @@
-package com.standings.android
+package com.standings.android.layout
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

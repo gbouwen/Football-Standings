@@ -1,4 +1,4 @@
-package com.standings.android
+package com.standings.android.layout
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

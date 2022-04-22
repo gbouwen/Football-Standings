@@ -1,7 +1,8 @@
-package com.standings.android
+package com.standings.android.layout
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.standings.android.R
 
 class MainActivity : AppCompatActivity() {
 
