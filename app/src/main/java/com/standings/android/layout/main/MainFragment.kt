@@ -28,7 +28,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView = view.findViewById(R.id.recycler_view_main)
 
         viewModel.getLeagues()
 
