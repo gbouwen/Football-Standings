@@ -1,7 +1,6 @@
 package com.standings.android.api
 
 import com.standings.android.model.League
-import com.standings.android.model.Post
 import retrofit2.http.GET
 import retrofit2.http.Path
 

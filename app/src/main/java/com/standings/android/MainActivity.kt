@@ -1,9 +1,9 @@
 package com.standings.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.standings.android.repository.Repository
 
@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             Log.d("Main", "Calling viewModel...")
             viewModel.getLeague(id = "ned.1")
-//            viewModel.getPost()
         }
 
 //        viewModel.leagues.observe(this) { list ->
@@ -40,11 +39,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.league.observe(this) { league ->
             Log.d("LeagueStatus", league.status.toString())
-//            Log.d("League", league.name)
-//            Log.d("League", league.slug)
-//            Log.d("League", league.abbreviation)
-//            Log.d("League", league.logos.light)
-//            Log.d("League", league.logos.dark)
+            Log.d("League", league.data.id)
+            Log.d("League", league.data.name)
+            Log.d("League", league.data.slug)
+            Log.d("League", league.data.abbreviation)
+            Log.d("League", league.data.logos.light)
+            Log.d("League", league.data.logos.dark)
         }
 
     }
