@@ -8,4 +8,9 @@ data class LeagueData(
     @field:Json(name = "slug") val slug: String,
     @field:Json(name = "abbr") val abbreviation: String,
     @field:Json(name = "logos") val logos: Logos,
-)
+) {
+    data class Logos(
+        @field:Json(name = "light") val light: String,
+        @field:Json(name = "dark") val dark: String,
+    )
+}
