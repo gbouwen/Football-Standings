@@ -1,4 +1,4 @@
-package com.standings.android.layout
+package com.standings.android.layout.main
 
 import android.os.Bundle
 import android.view.View
