@@ -10,7 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
-import com.standings.android.model.LeagueData
+import com.standings.android.model.league.LeagueData
 import com.standings.android.utils.putImage
 
 class LeagueAdapter(private val list: List<LeagueData>) : RecyclerView.Adapter<LeagueAdapter.ViewHolder>() {

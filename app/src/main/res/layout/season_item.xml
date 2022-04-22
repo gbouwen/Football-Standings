@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/season"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="6dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="2021/2022" />
-
-</com.google.android.material.card.MaterialCardView>
+    tools:text="2021/2022" />

@@ -1,4 +1,4 @@
-package com.standings.android.model
+package com.standings.android.model.league
 
 import com.squareup.moshi.Json
 

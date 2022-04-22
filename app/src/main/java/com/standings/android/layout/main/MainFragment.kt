@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.adapters.LeagueAdapter
-import com.standings.android.model.LeagueData
+import com.standings.android.model.league.LeagueData
 import com.standings.android.repository.Repository
 
 class MainFragment : Fragment(R.layout.fragment_main) {

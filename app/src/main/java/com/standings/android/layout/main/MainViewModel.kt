@@ -3,7 +3,7 @@ package com.standings.android.layout.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.standings.android.model.AllLeagues
+import com.standings.android.model.league.AllLeagues
 import com.standings.android.repository.Repository
 import kotlinx.coroutines.launch
 
