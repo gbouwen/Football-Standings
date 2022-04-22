@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.standings.android.R
 import com.standings.android.model.LeagueData
+import com.standings.android.utils.putImage
 
 class LeagueAdapter(private val list: List<LeagueData>) : RecyclerView.Adapter<LeagueAdapter.ViewHolder>() {
 
@@ -33,19 +34,13 @@ class LeagueAdapter(private val list: List<LeagueData>) : RecyclerView.Adapter<L
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
 
-        setData(holder, item)
+        putImage(holder.itemView.context, Uri.parse(item.logos.light), R.drawable.default_logo, holder.imageView)
+        holder.textView.text = item.name
         handleExpansion(holder)
         holder.button.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_nav_main_to_nav_seasons)
+            val bundle = bundleOf("id" to item.id)
+            view.findNavController().navigate(R.id.action_nav_main_to_nav_seasons, bundle)
         }
-    }
-
-    private fun setData(holder: ViewHolder, item: LeagueData) {
-        Glide.with(holder.itemView.context)
-            .load(Uri.parse(item.logos.light))
-            .placeholder(R.drawable.default_logo)
-            .into(holder.imageView)
-        holder.textView.text = item.name
     }
 
     private fun handleExpansion(holder: ViewHolder) {

@@ -4,7 +4,7 @@ import com.standings.android.api.RetrofitInstance
 import com.standings.android.model.AllLeagues
 import com.standings.android.model.League
 
-class Repository {
+object Repository {
 
     suspend fun getLeagues(): AllLeagues = RetrofitInstance.api.getLeagues()
 

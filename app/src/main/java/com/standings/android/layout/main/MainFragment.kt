@@ -15,13 +15,13 @@ import com.standings.android.repository.Repository
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: MainViewModel
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModelFactory = MainViewModelFactory(Repository())
+        val viewModelFactory = MainViewModelFactory(Repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
     }
 

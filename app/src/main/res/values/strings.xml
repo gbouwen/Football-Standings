@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Football Standings</string>
-    <string name="league_item_action">Show historic seasons</string>
+    <string name="league_item_action">Show seasons</string>
 </resources>
