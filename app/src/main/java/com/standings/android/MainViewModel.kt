@@ -16,7 +16,6 @@ class MainViewModel(
 
     //    val leagues: MutableLiveData<List<League>> = MutableLiveData()
     val league: MutableLiveData<League> = MutableLiveData()
-    val post: MutableLiveData<Post> = MutableLiveData()
 
 //    fun getLeagues() {
 //        viewModelScope.launch {
@@ -24,15 +23,9 @@ class MainViewModel(
 //        }
 //    }
 
-//    fun getLeague(id: String) {
-//        viewModelScope.launch {
-//            league.value = repository.getLeague(id)
-//        }
-//    }
-
-    fun getPost() {
+    fun getLeague(id: String) {
         viewModelScope.launch {
-            post.value = repository.getPost()
+            league.value = repository.getLeague(id)
         }
     }
 

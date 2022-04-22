@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             Log.d("Main", "Calling viewModel...")
-//            viewModel.getLeague(id = "ned.1")
-            viewModel.getPost()
+            viewModel.getLeague(id = "ned.1")
+//            viewModel.getPost()
         }
 
 //        viewModel.leagues.observe(this) { list ->
@@ -38,21 +38,15 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-//        viewModel.league.observe(this) { league ->
-//            Log.d("League", league.id)
+        viewModel.league.observe(this) { league ->
+            Log.d("LeagueStatus", league.status.toString())
 //            Log.d("League", league.name)
 //            Log.d("League", league.slug)
 //            Log.d("League", league.abbreviation)
 //            Log.d("League", league.logos.light)
 //            Log.d("League", league.logos.dark)
-//        }
-
-        viewModel.post.observe(this) { post ->
-            Log.d("Post", post.id.toString())
-            Log.d("Post", post.userId.toString())
-            Log.d("Post", post.title)
-            Log.d("Post", post.body)
         }
+
     }
 
 }
