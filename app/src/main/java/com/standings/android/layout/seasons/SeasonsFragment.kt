@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
-import com.standings.android.adapters.SeasonAdapter
+import com.standings.android.adapters.SeasonViewAdapter
 import com.standings.android.model.season.Season
 import com.standings.android.repository.Repository
 import com.standings.android.utils.putImage
@@ -50,11 +50,11 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
     }
 
     private fun setRecyclerView(seasons: List<Season>) {
-        recyclerView.adapter = SeasonAdapter(seasons)
+        recyclerView.adapter = SeasonViewAdapter(seasons, R.layout.season_item) { item: Season, view: View ->
+            val textView: TextView = view.findViewById(R.id.season)
+            textView.text = view.context.resources.getString(R.string.season, item.year, item.year + 1)
+        }
         recyclerView.layoutManager = LinearLayoutManager(context)
-//        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-//        AppCompatResources.getDrawable(requireContext(), R.drawable.list_divider_single_horizontal)?.let { divider.setDrawable(it) }
-//        recyclerView.addItemDecoration(divider)
     }
 
 }
