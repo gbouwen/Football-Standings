@@ -7,7 +7,7 @@ data class Season(
     @field:Json(name = "startDate") val startDate: String,
     @field:Json(name = "endDate") val endDate: String,
     @field:Json(name = "displayName") val displayName: String,
-    @field:Json(name = "types") val types: List<Type>
+    @field:Json(name = "types") val types: List<Type>,
 ) {
     data class Type(
         @field:Json(name = "id") val id: Int,
