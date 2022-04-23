@@ -3,17 +3,19 @@ package com.standings.android.layout.seasons
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
-import com.standings.android.adapters.SeasonAdapter
 import com.standings.android.model.season.Season
 import com.standings.android.repository.Repository
 import com.standings.android.utils.putImage
+import com.standings.android.utils.set
 
 class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
 
@@ -49,12 +51,19 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
         }
     }
 
-    private fun setRecyclerView(seasons: List<Season>) {
-        recyclerView.adapter = SeasonAdapter(seasons)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-//        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-//        AppCompatResources.getDrawable(requireContext(), R.drawable.list_divider_single_horizontal)?.let { divider.setDrawable(it) }
-//        recyclerView.addItemDecoration(divider)
+    private fun setRecyclerView(data: List<Season>) {
+        recyclerView.set(
+            context = requireContext(),
+            list = data,
+            layoutId = R.layout.season_item,
+            layoutManager = LinearLayoutManager(context),
+        ) { item: Season, view: View ->
+            val button: Button = view.findViewById(R.id.season)
+            button.text = view.context.resources.getString(R.string.season, item.year, item.year + 1)
+            button.setOnClickListener {
+                Toast.makeText(context, "Yoooooo!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 }

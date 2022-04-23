@@ -1,17 +1,21 @@
 package com.standings.android.layout.main
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.content.res.AppCompatResources
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
-import com.standings.android.adapters.LeagueAdapter
 import com.standings.android.model.league.LeagueData
 import com.standings.android.repository.Repository
+import com.standings.android.utils.putImage
+import com.standings.android.utils.set
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -37,11 +41,24 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
-    private fun setRecyclerView(leagues: List<LeagueData>) {
-        recyclerView.adapter = LeagueAdapter(leagues)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-        AppCompatResources.getDrawable(requireContext(), R.drawable.list_divider_single_horizontal)?.let { divider.setDrawable(it) }
-        recyclerView.addItemDecoration(divider)
+    private fun setRecyclerView(data: List<LeagueData>) {
+        recyclerView.set(
+            context = requireContext(),
+            list = data,
+            layoutId = R.layout.league_item,
+            layoutManager = LinearLayoutManager(context),
+            addDivider = true,
+        ) { item: LeagueData, view: View ->
+            val imageView: ImageView = view.findViewById(R.id.league_logo)
+            val textView: TextView = view.findViewById(R.id.league_name)
+
+            putImage(requireContext(), Uri.parse(item.logos.light), R.drawable.default_logo, imageView)
+            textView.text = item.name
+            view.setOnClickListener {
+                val bundle = bundleOf("id" to item.id)
+                view.findNavController().navigate(R.id.action_nav_main_to_nav_seasons, bundle)
+            }
+        }
     }
+
 }
