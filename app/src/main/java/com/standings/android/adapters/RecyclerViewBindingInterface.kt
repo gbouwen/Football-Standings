@@ -1,4 +1,4 @@
-package com.standings.android.utils
+package com.standings.android.adapters
 
 import android.view.View
 

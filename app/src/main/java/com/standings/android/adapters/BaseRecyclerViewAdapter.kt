@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
-import com.standings.android.utils.RecyclerViewBindingInterface
 
 open class BaseRecyclerViewAdapter<T : Any>(
     private val list: List<T>,
@@ -26,7 +25,6 @@ open class BaseRecyclerViewAdapter<T : Any>(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
-
         holder.bind(item, bindingInterface)
     }
 
