@@ -1,4 +1,4 @@
-package com.standings.android.api
+package com.standings.android.singletons
 
 import com.squareup.moshi.Moshi
 

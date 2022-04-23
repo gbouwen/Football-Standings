@@ -1,6 +1,6 @@
 package com.standings.android.repository
 
-import com.standings.android.api.RetrofitInstance
+import com.standings.android.singletons.RetrofitInstance
 import com.standings.android.model.league.AllLeagues
 import com.standings.android.model.league.League
 import com.standings.android.model.season.AllSeasons

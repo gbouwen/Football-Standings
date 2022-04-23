@@ -1,5 +1,6 @@
-package com.standings.android.api
+package com.standings.android.singletons
 
+import com.standings.android.api.FootballStandingsApi
 import com.standings.android.api.FootballStandingsApi.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
