@@ -9,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.model.league.LeagueData
@@ -46,7 +45,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             context = requireContext(),
             list = data,
             layoutId = R.layout.league_item,
-            layoutManager = LinearLayoutManager(context),
             addDivider = true,
         ) { item: LeagueData, view: View ->
             val imageView: ImageView = view.findViewById(R.id.league_logo)

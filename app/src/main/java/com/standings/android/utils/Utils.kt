@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.standings.android.R
@@ -23,7 +24,7 @@ fun <T : Any> RecyclerView.set(
     context: Context,
     list: List<T>,
     @LayoutRes layoutId: Int,
-    layoutManager: RecyclerView.LayoutManager,
+    layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
     addDivider: Boolean = false,
     bindData: RecyclerViewBindingInterface<T>
 ) {

@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.model.season.Season
@@ -56,7 +55,6 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
             context = requireContext(),
             list = data,
             layoutId = R.layout.season_item,
-            layoutManager = LinearLayoutManager(context),
         ) { item: Season, view: View ->
             val button: Button = view.findViewById(R.id.season)
             button.text = view.context.resources.getString(R.string.season, item.year, item.year + 1)
