@@ -9,12 +9,15 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.model.league.LeagueData
 import com.standings.android.repository.Repository
+import com.standings.android.utils.addDivider
 import com.standings.android.utils.putImage
-import com.standings.android.utils.set
+import com.standings.android.utils.setAdapter
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
@@ -41,12 +44,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun setRecyclerView(data: List<LeagueData>) {
-        recyclerView.set(
-            context = requireContext(),
-            list = data,
-            layoutId = R.layout.league_item,
-            addDivider = true,
-        ) { item: LeagueData, view: View ->
+        recyclerView.setAdapter(data, R.layout.league_item) { item: LeagueData, view: View ->
             val imageView: ImageView = view.findViewById(R.id.league_logo)
             val textView: TextView = view.findViewById(R.id.league_name)
 
@@ -57,6 +55,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 view.findNavController().navigate(R.id.action_nav_main_to_nav_seasons, bundle)
             }
         }
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addDivider(orientation = DividerItemDecoration.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)
     }
 
 }

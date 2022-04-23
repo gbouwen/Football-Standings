@@ -14,7 +14,7 @@ import com.standings.android.R
 import com.standings.android.model.season.Season
 import com.standings.android.repository.Repository
 import com.standings.android.utils.putImage
-import com.standings.android.utils.set
+import com.standings.android.utils.setAdapter
 
 class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
 
@@ -51,11 +51,7 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
     }
 
     private fun setRecyclerView(data: List<Season>) {
-        recyclerView.set(
-            context = requireContext(),
-            list = data,
-            layoutId = R.layout.season_item,
-        ) { item: Season, view: View ->
+        recyclerView.setAdapter(data, R.layout.season_item) { item: Season, view: View ->
             val button: Button = view.findViewById(R.id.season)
             button.text = view.context.resources.getString(R.string.season, item.year, item.year + 1)
             button.setOnClickListener {
