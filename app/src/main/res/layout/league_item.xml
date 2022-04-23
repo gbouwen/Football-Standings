@@ -39,13 +39,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/league_item_action"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/league_item_action"
-            android:visibility="gone" />
-
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
