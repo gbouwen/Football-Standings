@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
-open class BaseRecyclerViewAdapter<T : Any>(
+class BaseRecyclerViewAdapter<T : Any>(
     private val list: List<T>,
     @LayoutRes private val layoutId: Int,
     private val bindingInterface: RecyclerViewBindingInterface<T>,

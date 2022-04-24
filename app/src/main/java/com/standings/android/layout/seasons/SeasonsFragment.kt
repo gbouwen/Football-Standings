@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.model.season.Season
 import com.standings.android.repository.Repository
+import com.standings.android.singletons.flagMap
 import com.standings.android.utils.putImage
 import com.standings.android.utils.setAdapter
 
@@ -22,8 +23,9 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
 
     private lateinit var viewModel: SeasonsViewModel
     private lateinit var leagueId: String
-    private lateinit var logo: ImageView
-    private lateinit var name: TextView
+    private lateinit var leagueLogo: ImageView
+    private lateinit var flag: ImageView
+    private lateinit var leagueName: TextView
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,16 +37,22 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        logo = view.findViewById(R.id.league_logo)
-        name = view.findViewById(R.id.league_name)
+        leagueLogo = view.findViewById(R.id.league_logo)
+        flag = view.findViewById(R.id.league_country_flag)
+        leagueName = view.findViewById(R.id.league_name)
         recyclerView = view.findViewById(R.id.recycler_view_seasons)
 
         viewModel.getLeague(leagueId)
         viewModel.getSeasons(leagueId)
 
         viewModel.league.observe(viewLifecycleOwner) { league ->
-            putImage(requireContext(), Uri.parse(league.data.logos.light), R.drawable.default_logo, logo)
-            name.text = league.data.name
+            val splitLeagueName = league.data.name.split(" ")
+            val country = splitLeagueName[0]
+            val leagueNameWithoutCountry = league.data.name.replace(country, "")
+
+            putImage(requireContext(), Uri.parse(league.data.logos.light), R.drawable.default_logo, leagueLogo)
+            flag.setImageResource(flagMap[country] ?: R.drawable.default_flag)
+            leagueName.text = leagueNameWithoutCountry
         }
 
         viewModel.allSeasons.observe(viewLifecycleOwner) { allSeasons ->
