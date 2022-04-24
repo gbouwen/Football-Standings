@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.model.season.Season
@@ -55,9 +57,11 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
             val button: Button = view.findViewById(R.id.season)
             button.text = view.context.resources.getString(R.string.season, item.year, item.year + 1)
             button.setOnClickListener {
-                Toast.makeText(context, "Yoooooo!", Toast.LENGTH_SHORT).show()
+                val bundle = bundleOf("id" to leagueId, "year" to item.year.toString())
+                findNavController().navigate(R.id.action_nav_seasons_to_nav_standings, bundle)
             }
         }
+        recyclerView.layoutManager = LinearLayoutManager(context)
     }
 
 }
