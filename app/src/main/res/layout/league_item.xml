@@ -61,10 +61,10 @@
             <TextView
                 android:id="@+id/league_current_season"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/icon_size"
+                android:drawablePadding="@dimen/half_spacing"
                 android:gravity="center"
                 android:textSize="@dimen/text_size_medium"
-                android:drawablePadding="@dimen/half_spacing"
                 app:drawableEndCompat="@drawable/ic_down_arrow"
                 tools:text="2021/2022" />
 

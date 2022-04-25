@@ -3,17 +3,19 @@ package com.standings.android.layout.standings.season_picker
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.standings.android.model.season.AllSeasons
 import com.standings.android.repository.Repository
 import kotlinx.coroutines.launch
 
 class SeasonPickerViewModel(private val repository: Repository) : ViewModel() {
 
-    var allSeasons = MutableLiveData<AllSeasons>()
+    var years = MutableLiveData<List<Int>>()
 
-    fun getAllSeasons(leagueId: String) {
+    fun getYears(leagueId: String) {
         viewModelScope.launch {
-            allSeasons.value = repository.getSeasons(leagueId)
+            val allSeasons = repository.getSeasons(leagueId)
+            years.value = allSeasons.data.seasons.map { season ->
+                season.year
+            }
         }
     }
 }
