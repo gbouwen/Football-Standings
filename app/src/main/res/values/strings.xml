@@ -6,4 +6,5 @@
     <string name="team">Team</string>
     <string name="p">P</string>
     <string name="points_abbreviation">PTS</string>
+    <string name="season_title">Season</string>
 </resources>
