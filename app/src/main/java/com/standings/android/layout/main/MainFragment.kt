@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
+import com.standings.android.model.FullLeagueName
 import com.standings.android.model.league.LeagueData
 import com.standings.android.repository.Repository
 import com.standings.android.singletons.flagMap
@@ -50,12 +51,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             val flag: ImageView = view.findViewById(R.id.league_country_flag)
             val leagueName: TextView = view.findViewById(R.id.league_name)
 
-            val splitLeagueName = item.name.split(" ")
-            val country = splitLeagueName[0]
-            val leagueNameWithoutCountry = item.name.replace(country, "")
+            val fullLeagueName = FullLeagueName(item.name)
             putImage(requireContext(), Uri.parse(item.logos.light), R.drawable.default_logo, leagueLogo)
-            flag.setImageResource(flagMap[country] ?: R.drawable.default_flag)
-            leagueName.text = leagueNameWithoutCountry
+            flag.setImageResource(flagMap[fullLeagueName.country] ?: R.drawable.default_flag)
+            leagueName.text = fullLeagueName.leagueName
             view.setOnClickListener {
                 val bundle = bundleOf("id" to item.id)
                 view.findNavController().navigate(R.id.action_nav_main_to_nav_seasons, bundle)

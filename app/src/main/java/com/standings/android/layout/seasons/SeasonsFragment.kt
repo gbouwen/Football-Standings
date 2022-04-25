@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
+import com.standings.android.model.FullLeagueName
 import com.standings.android.model.season.Season
 import com.standings.android.repository.Repository
 import com.standings.android.singletons.flagMap
@@ -46,13 +47,11 @@ class SeasonsFragment : Fragment(R.layout.fragment_seasons) {
         viewModel.getSeasons(leagueId)
 
         viewModel.league.observe(viewLifecycleOwner) { league ->
-            val splitLeagueName = league.data.name.split(" ")
-            val country = splitLeagueName[0]
-            val leagueNameWithoutCountry = league.data.name.replace(country, "")
+            val fullLeagueName = FullLeagueName(league.data.name)
 
             putImage(requireContext(), Uri.parse(league.data.logos.light), R.drawable.default_logo, leagueLogo)
-            flag.setImageResource(flagMap[country] ?: R.drawable.default_flag)
-            leagueName.text = leagueNameWithoutCountry
+            flag.setImageResource(flagMap[fullLeagueName.country] ?: R.drawable.default_flag)
+            leagueName.text = fullLeagueName.leagueName
         }
 
         viewModel.allSeasons.observe(viewLifecycleOwner) { allSeasons ->
