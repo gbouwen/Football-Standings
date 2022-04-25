@@ -77,7 +77,6 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             val logo: ImageView = view.findViewById(R.id.club_logo)
             val name: TextView = view.findViewById(R.id.club_name)
             val gamesPlayed: TextView = view.findViewById(R.id.club_games_played)
-            val goalDifference: TextView = view.findViewById(R.id.club_goal_difference)
             val points: TextView = view.findViewById(R.id.club_points)
 
             rank.text = item.stats.find { it.name == RANK }?.value.toString()
@@ -89,7 +88,6 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             }
             name.text = item.team?.name
             gamesPlayed.text = item.stats.find { it.name == GAMES_PLAYED }?.value.toString()
-            goalDifference.text = item.stats.find { it.name == GOAL_DIFFERENCE }?.value.toString()
             points.text = item.stats.find { it.name == POINTS }?.value.toString()
         }
         recyclerView.layoutManager = LinearLayoutManager(context)

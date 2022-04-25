@@ -61,7 +61,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addDivider(orientation = DividerItemDecoration.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)
+        recyclerView.addDivider(orientation = DividerItemDecoration.VERTICAL, drawableId = R.drawable.list_divider_half_horizontal)
     }
 
 }

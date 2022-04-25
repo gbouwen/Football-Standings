@@ -5,6 +5,5 @@
     <string name="hashtag">#</string>
     <string name="team">Team</string>
     <string name="p">P</string>
-    <string name="goal_difference_abbreviation">GD</string>
     <string name="points_abbreviation">PTS</string>
 </resources>

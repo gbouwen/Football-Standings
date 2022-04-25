@@ -7,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/single_spacing"
         android:divider="@drawable/list_divider_half_vertical"
         android:orientation="horizontal"
         android:showDividers="middle">

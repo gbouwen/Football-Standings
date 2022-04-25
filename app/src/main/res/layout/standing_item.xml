@@ -44,17 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/single_spacing"
-            android:layout_toStartOf="@id/club_goal_difference"
-            tools:text="33" />
-
-        <TextView
-            android:id="@+id/club_goal_difference"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/single_spacing"
             android:layout_toStartOf="@id/club_points"
-            tools:text="59" />
+            tools:text="33" />
 
         <TextView
             android:id="@+id/club_points"

@@ -42,17 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="@dimen/single_spacing"
-                android:layout_toStartOf="@id/header_goal_difference"
-                android:text="@string/p" />
-
-            <TextView
-                android:id="@+id/header_goal_difference"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/single_spacing"
                 android:layout_toStartOf="@id/header_points"
-                android:text="@string/goal_difference_abbreviation" />
+                android:text="@string/p" />
 
             <TextView
                 android:id="@+id/header_points"
