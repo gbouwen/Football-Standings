@@ -41,11 +41,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         viewModel.getLeagues()
 
         viewModel.leagues.observe(viewLifecycleOwner) { allLeagues ->
-            setRecyclerView(allLeagues.data)
+            setRecyclerViewAdapter(allLeagues.data)
         }
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addDivider(orientation = DividerItemDecoration.VERTICAL, drawableId = R.drawable.list_divider_half_horizontal)
     }
 
-    private fun setRecyclerView(data: List<LeagueData>) {
+    private fun setRecyclerViewAdapter(data: List<LeagueData>) {
         recyclerView.setAdapter(data, R.layout.league_item) { item: LeagueData, view: View ->
             val leagueLogo: ImageView = view.findViewById(R.id.league_logo)
             val flag: ImageView = view.findViewById(R.id.league_country_flag)
@@ -60,8 +62,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 view.findNavController().navigate(R.id.action_nav_main_to_nav_standings, bundle)
             }
         }
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addDivider(orientation = DividerItemDecoration.VERTICAL, drawableId = R.drawable.list_divider_half_horizontal)
     }
 
 }

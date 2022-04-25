@@ -38,11 +38,13 @@ class SeasonPickerDialogFragment(
         viewModel.getAllSeasons(leagueId)
 
         viewModel.allSeasons.observe(viewLifecycleOwner) { allSeasons ->
-            setRecyclerView(allSeasons.data.seasons)
+            setRecyclerViewAdapter(allSeasons.data.seasons)
         }
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.addDivider(orientation = LinearLayoutManager.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)
     }
 
-    private fun setRecyclerView(data: List<Season>) {
+    private fun setRecyclerViewAdapter(data: List<Season>) {
         recyclerView.setAdapter(data, R.layout.season_item) { item: Season, view: View ->
             val season: TextView = view.findViewById(R.id.season_item_text)
 
@@ -52,8 +54,6 @@ class SeasonPickerDialogFragment(
                 dismiss()
             }
         }
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addDivider(orientation = LinearLayoutManager.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)
     }
 
 }
