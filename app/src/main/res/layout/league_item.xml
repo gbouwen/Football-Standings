@@ -37,10 +37,19 @@
 
         <TextView
             android:id="@+id/league_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             tools:text="PLACEHOLDER LEAGUE NAME" />
+
+        <TextView
+            android:id="@+id/league_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="2021/2022" />
 
     </LinearLayout>
 
