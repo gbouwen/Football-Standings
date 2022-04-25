@@ -61,8 +61,13 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             val points: TextView = view.findViewById(R.id.club_points)
 
             rank.text = item.stats.find { it.name == RANK }?.value.toString()
-            putImage(requireContext(), Uri.parse(item.team.logos[0].link), R.drawable.default_logo, logo)
-            name.text = item.team.name
+            try {
+                putImage(requireContext(), Uri.parse(item.team?.logos?.get(0)?.link), R.drawable.default_logo, logo)
+            } catch (e: Exception) {
+                logo.setImageResource(R.drawable.default_logo)
+                Log.e("Logo", "Could not find team logo")
+            }
+            name.text = item.team?.name
             gamesPlayed.text = item.stats.find { it.name == GAMES_PLAYED }?.value.toString()
             goalDifference.text = item.stats.find { it.name == GOAL_DIFFERENCE }?.value.toString()
             points.text = item.stats.find { it.name == POINTS }?.value.toString()
