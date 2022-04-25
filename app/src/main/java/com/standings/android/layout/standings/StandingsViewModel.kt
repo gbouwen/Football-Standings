@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.standings.android.model.league.League
+import com.standings.android.model.season.AllSeasons
 import com.standings.android.model.standings.AllStandings
 import com.standings.android.repository.Repository
 import kotlinx.coroutines.launch
@@ -11,6 +12,7 @@ import kotlinx.coroutines.launch
 class StandingsViewModel(private val repository: Repository) : ViewModel() {
 
     val league: MutableLiveData<League> = MutableLiveData()
+    val allSeasons: MutableLiveData<AllSeasons> = MutableLiveData()
     val allStandings: MutableLiveData<AllStandings> = MutableLiveData()
 
     fun getLeague(id: String) {
@@ -19,9 +21,15 @@ class StandingsViewModel(private val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getStandings(id: String, season: String) {
+    fun getSeasons(id: String) {
         viewModelScope.launch {
-            allStandings.value = repository.getStandings(id, season)
+            allSeasons.value = repository.getSeasons(id)
+        }
+    }
+
+    fun getStandings(id: String, year: Int) {
+        viewModelScope.launch {
+            allStandings.value = repository.getStandings(id, year)
         }
     }
 

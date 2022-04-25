@@ -57,7 +57,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             leagueName.text = fullLeagueName.leagueName
             view.setOnClickListener {
                 val bundle = bundleOf("id" to item.id)
-                view.findNavController().navigate(R.id.action_nav_main_to_nav_seasons, bundle)
+                view.findNavController().navigate(R.id.action_nav_main_to_nav_standings, bundle)
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)

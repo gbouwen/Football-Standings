@@ -11,19 +11,8 @@
         android:label="main_fragment"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_nav_main_to_nav_seasons"
-            app:destination="@id/nav_seasons" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/nav_seasons"
-        android:name="com.standings.android.layout.seasons.SeasonsFragment"
-        android:label="seasons_fragment"
-        tools:layout="@layout/fragment_seasons">
-        <action
-            android:id="@+id/action_nav_seasons_to_nav_standings"
+            android:id="@+id/action_nav_main_to_nav_standings"
             app:destination="@id/nav_standings" />
-
     </fragment>
 
     <fragment

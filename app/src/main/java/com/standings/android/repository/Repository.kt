@@ -14,6 +14,6 @@ object Repository {
 
     suspend fun getSeasons(id: String): AllSeasons = RetrofitInstance.api.getSeasons(id)
 
-    suspend fun getStandings(id: String, season: String): AllStandings = RetrofitInstance.api.getStandings(id, season)
+    suspend fun getStandings(id: String, year: Int): AllStandings = RetrofitInstance.api.getStandings(id, year)
 
 }

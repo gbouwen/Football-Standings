@@ -26,6 +26,6 @@ interface FootballStandingsApi {
     suspend fun getSeasons(@Path("id") id: String): AllSeasons
 
     @GET("$LEAGUES/{$ID}/standings")
-    suspend fun getStandings(@Path("id") id: String, @Query("season") season: String): AllStandings
+    suspend fun getStandings(@Path("id") id: String, @Query("season") season: Int): AllStandings
 
 }

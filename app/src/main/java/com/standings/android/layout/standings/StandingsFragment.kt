@@ -24,7 +24,6 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
     companion object {
         const val RANK = "Rank"
         const val GAMES_PLAYED = "Games Played"
-        const val GOAL_DIFFERENCE = "Goal Difference"
         const val POINTS = "Points"
     }
 
@@ -34,7 +33,6 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
     private lateinit var leagueName: TextView
     private lateinit var season: TextView
     private lateinit var leagueId: String
-    private lateinit var year: String
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +41,6 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
         val viewModelFactory = StandingsViewModelFactory(Repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[StandingsViewModel::class.java]
         leagueId = arguments?.getString("id") ?: ""
-        year = arguments?.getString("year") ?: ""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +51,7 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
         recyclerView = view.findViewById(R.id.recycler_view_standings)
 
         viewModel.getLeague(leagueId)
-        viewModel.getStandings(leagueId, year)
+        viewModel.getSeasons(leagueId)
 
         viewModel.league.observe(viewLifecycleOwner) { league ->
             val fullLeagueName = FullLeagueName(league.data.name)
@@ -63,7 +60,15 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             flag.setImageResource(flagMap[fullLeagueName.country] ?: R.drawable.default_flag)
             leagueName.text = fullLeagueName.leagueName
             season.visibility = View.VISIBLE
-            season.text = view.context.resources.getString(R.string.season, year.toInt(), year.toInt() + 1)
+        }
+
+        viewModel.allSeasons.observe(viewLifecycleOwner) { allSeasons ->
+            season.text = view.context.resources.getString(
+                R.string.season,
+                allSeasons.data.seasons[0].year,
+                allSeasons.data.seasons[0].year + 1
+            )
+            viewModel.getStandings(leagueId, allSeasons.data.seasons[0].year)
         }
 
         viewModel.allStandings.observe(viewLifecycleOwner) { allStandings ->
