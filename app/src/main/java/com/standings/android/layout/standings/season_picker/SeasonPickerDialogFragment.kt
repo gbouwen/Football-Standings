@@ -3,7 +3,9 @@ package com.standings.android.layout.standings.season_picker
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,13 +15,11 @@ import com.standings.android.repository.Repository
 import com.standings.android.utils.addDivider
 import com.standings.android.utils.setAdapter
 
-class SeasonPickerDialogFragment(
-    private val leagueId: String,
-    private val seasonListenerInterface: SeasonListenerInterface,
-) : DialogFragment(R.layout.fragment_season_picker) {
+class SeasonPickerDialogFragment() : DialogFragment(R.layout.fragment_season_picker) {
 
     private lateinit var viewModel: SeasonPickerViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var leagueId: String
 
     companion object {
         const val TAG = "SeasonPickerDialogFragment"
@@ -30,6 +30,7 @@ class SeasonPickerDialogFragment(
 
         val viewModelFactory = SeasonPickerViewModelFactory(Repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[SeasonPickerViewModel::class.java]
+        leagueId = arguments?.getString("leagueId") ?: ""
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +51,7 @@ class SeasonPickerDialogFragment(
 
             season.text = view.resources.getString(R.string.season, item.year, item.year + 1)
             view.setOnClickListener {
-                seasonListenerInterface.listen(item.year)
+                setFragmentResult("year", bundleOf("year" to item.year))
                 dismiss()
             }
         }

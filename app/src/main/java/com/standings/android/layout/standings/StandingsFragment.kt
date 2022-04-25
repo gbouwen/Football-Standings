@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,12 +60,15 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
 
         seasonPicker.visibility = View.VISIBLE
         seasonPicker.setOnClickListener {
-            val dialogFragment = SeasonPickerDialogFragment(leagueId) { year ->
-                viewModel.getStandings(leagueId, year)
-                currentSeason.text = setSeason(view.context, year)
-            }
-
+            val dialogFragment = SeasonPickerDialogFragment()
+            dialogFragment.arguments = bundleOf("leagueId" to leagueId)
             dialogFragment.show(childFragmentManager, SeasonPickerDialogFragment.TAG)
+        }
+
+        childFragmentManager.setFragmentResultListener("year", viewLifecycleOwner) { key, bundle ->
+            val year = bundle.getInt(key)
+            viewModel.getStandings(leagueId, year)
+            currentSeason.text = setSeason(view.context, year)
         }
 
         viewModel.league.observe(viewLifecycleOwner) { league ->
