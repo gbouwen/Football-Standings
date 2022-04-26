@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/single_spacing"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/single_spacing">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/league_item" />
+
+    <include layout="@layout/error_textview" />
 
 </LinearLayout>

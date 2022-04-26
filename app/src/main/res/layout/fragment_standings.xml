@@ -60,8 +60,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_standings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/standing_item" />
+
+    <include layout="@layout/error_textview" />
 
 </LinearLayout>

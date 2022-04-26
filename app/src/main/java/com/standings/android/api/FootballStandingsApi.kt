@@ -4,6 +4,7 @@ import com.standings.android.model.league.AllLeagues
 import com.standings.android.model.league.League
 import com.standings.android.model.season.AllSeasons
 import com.standings.android.model.standings.AllStandings
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,15 +18,15 @@ interface FootballStandingsApi {
     }
 
     @GET(LEAGUES)
-    suspend fun getLeagues(): AllLeagues
+    suspend fun getLeagues(): Response<AllLeagues>
 
     @GET("$LEAGUES/{$ID}")
-    suspend fun getLeague(@Path("id") id: String): League
+    suspend fun getLeague(@Path("id") id: String): Response<League>
 
     @GET("$LEAGUES/{$ID}/seasons")
-    suspend fun getSeasons(@Path("id") id: String): AllSeasons
+    suspend fun getSeasons(@Path("id") id: String): Response<AllSeasons>
 
     @GET("$LEAGUES/{$ID}/standings")
-    suspend fun getStandings(@Path("id") id: String, @Query("season") season: Int): AllStandings
+    suspend fun getStandings(@Path("id") id: String, @Query("season") season: Int): Response<AllStandings>
 
 }

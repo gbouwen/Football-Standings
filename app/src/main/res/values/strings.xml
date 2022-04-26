@@ -7,4 +7,6 @@
     <string name="p">P</string>
     <string name="points_abbreviation">PTS</string>
     <string name="season_title">Season</string>
+    <string name="error_message_http">Error: HTTP %1$d</string>
+    <string name="error_message_generic">Oops, something went wrong!</string>
 </resources>

@@ -6,12 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.standings.android.model.league.AllLeagues
 import com.standings.android.repository.Repository
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class MainViewModel(
     private val repository: Repository
 ) : ViewModel() {
 
-    val leagues: MutableLiveData<AllLeagues> = MutableLiveData()
+    val leagues: MutableLiveData<Response<AllLeagues>> = MutableLiveData()
 
     fun getLeagues() {
         viewModelScope.launch {

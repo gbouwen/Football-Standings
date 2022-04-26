@@ -17,10 +17,7 @@ import com.standings.android.model.FullLeagueName
 import com.standings.android.model.standings.Standings
 import com.standings.android.repository.Repository
 import com.standings.android.singletons.flagMap
-import com.standings.android.utils.addDivider
-import com.standings.android.utils.putImage
-import com.standings.android.utils.setAdapter
-import com.standings.android.utils.setSeason
+import com.standings.android.utils.*
 
 class StandingsFragment : Fragment(R.layout.fragment_standings) {
 
@@ -38,6 +35,7 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
     private lateinit var currentSeason: TextView
     private lateinit var leagueId: String
     private lateinit var recyclerView: RecyclerView
+    private lateinit var errorView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +52,7 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
         seasonPicker = view.findViewById(R.id.league_season_picker)
         currentSeason = view.findViewById(R.id.league_current_season)
         recyclerView = view.findViewById(R.id.recycler_view_standings)
+        errorView = view.findViewById(R.id.error_view)
 
         viewModel.getLeague(leagueId)
         viewModel.getSeasons(leagueId)
@@ -71,21 +70,36 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             currentSeason.text = setSeason(view.context, year)
         }
 
-        viewModel.league.observe(viewLifecycleOwner) { league ->
-            val fullLeagueName = FullLeagueName(league.data.name)
+        viewModel.league.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val league = response.body()!!
+                val fullLeagueName = FullLeagueName(league.data.name)
 
-            putImage(requireContext(), Uri.parse(league.data.logos.light), R.drawable.default_logo, leagueLogo)
-            flag.setImageResource(flagMap[fullLeagueName.country] ?: R.drawable.default_flag)
-            leagueName.text = fullLeagueName.leagueName
+                putImage(requireContext(), Uri.parse(league.data.logos.light), R.drawable.default_logo, leagueLogo)
+                flag.setImageResource(flagMap[fullLeagueName.country] ?: R.drawable.default_flag)
+                leagueName.text = fullLeagueName.leagueName
+            } else {
+                setErrorState(response.code())
+            }
         }
 
-        viewModel.allSeasons.observe(viewLifecycleOwner) { allSeasons ->
-            currentSeason.text = setSeason(view.context, allSeasons.data.seasons[0].year)
-            viewModel.getStandings(leagueId, allSeasons.data.seasons[0].year)
+        viewModel.allSeasons.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val allSeasons = response.body()!!
+                viewModel.getStandings(leagueId, allSeasons.data.seasons[0].year)
+                currentSeason.text = setSeason(view.context, allSeasons.data.seasons[0].year)
+            } else {
+                setErrorState(response.code())
+            }
         }
 
-        viewModel.allStandings.observe(viewLifecycleOwner) { allStandings ->
-            setRecyclerViewAdapter(allStandings.data.standings)
+        viewModel.allStandings.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val allStandings = response.body()!!
+                setRecyclerViewAdapter(allStandings.data.standings)
+            } else {
+                setErrorState(response.code())
+            }
         }
 
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -112,6 +126,12 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             gamesPlayed.text = item.stats.find { it.name == GAMES_PLAYED }?.value.toString()
             points.text = item.stats.find { it.name == POINTS }?.value.toString()
         }
+    }
+
+    private fun setErrorState(errorCode: Int) {
+        Log.d("RetrofitError", errorCode.toString())
+        recyclerView.clear()
+        errorView.text = requireContext().getString(R.string.error_message_http, errorCode)
     }
 
 }

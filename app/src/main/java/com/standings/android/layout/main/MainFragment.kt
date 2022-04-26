@@ -2,6 +2,7 @@ package com.standings.android.layout.main
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,7 @@ import com.standings.android.model.league.LeagueData
 import com.standings.android.repository.Repository
 import com.standings.android.singletons.flagMap
 import com.standings.android.utils.addDivider
+import com.standings.android.utils.clear
 import com.standings.android.utils.putImage
 import com.standings.android.utils.setAdapter
 
@@ -25,6 +27,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var errorView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +40,19 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recycler_view_main)
+        errorView = view.findViewById(R.id.error_view)
 
         viewModel.getLeagues()
 
-        viewModel.leagues.observe(viewLifecycleOwner) { allLeagues ->
-            setRecyclerViewAdapter(allLeagues.data)
+        viewModel.leagues.observe(viewLifecycleOwner) { response ->
+            if (response.isSuccessful) {
+                val allLeagues = response.body()!!
+                setRecyclerViewAdapter(allLeagues.data)
+            } else {
+                Log.d("RetrofitError", response.code().toString())
+                recyclerView.clear()
+                errorView.text = requireContext().getString(R.string.error_message_http, response.code())
+            }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addDivider(orientation = DividerItemDecoration.VERTICAL, drawableId = R.drawable.list_divider_half_horizontal)

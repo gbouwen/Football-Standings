@@ -12,9 +12,13 @@ class SeasonPickerViewModel(private val repository: Repository) : ViewModel() {
 
     fun getYears(leagueId: String) {
         viewModelScope.launch {
-            val allSeasons = repository.getSeasons(leagueId)
-            years.value = allSeasons.data.seasons.map { season ->
-                season.year
+            val response = repository.getSeasons(leagueId)
+            if (response.isSuccessful) {
+                years.value = response.body()!!.data.seasons.map { season ->
+                    season.year
+                }
+            } else {
+                years.value = listOf()
             }
         }
     }

@@ -8,10 +8,10 @@
     android:padding="@dimen/single_spacing">
 
     <TextView
-        android:textSize="@dimen/text_size_big"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/season_title" />
+        android:text="@string/season_title"
+        android:textSize="@dimen/text_size_big" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_season_picker"
@@ -19,5 +19,7 @@
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/season_item" />
+
+    <include layout="@layout/error_textview" />
 
 </LinearLayout>

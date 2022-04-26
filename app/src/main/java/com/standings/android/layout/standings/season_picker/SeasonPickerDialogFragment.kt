@@ -1,6 +1,7 @@
 package com.standings.android.layout.standings.season_picker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -12,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.standings.android.R
 import com.standings.android.repository.Repository
 import com.standings.android.utils.addDivider
+import com.standings.android.utils.clear
 import com.standings.android.utils.setAdapter
 
-class SeasonPickerDialogFragment() : DialogFragment(R.layout.fragment_season_picker) {
+class SeasonPickerDialogFragment : DialogFragment(R.layout.fragment_season_picker) {
 
     private lateinit var viewModel: SeasonPickerViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var errorView: TextView
     private lateinit var leagueId: String
 
     companion object {
@@ -34,11 +37,18 @@ class SeasonPickerDialogFragment() : DialogFragment(R.layout.fragment_season_pic
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = view.findViewById(R.id.recycler_view_season_picker)
+        errorView = view.findViewById(R.id.error_view)
 
         viewModel.getYears(leagueId)
 
         viewModel.years.observe(viewLifecycleOwner) { years ->
-            setRecyclerViewAdapter(years)
+            if (years.isEmpty()) {
+                Log.d("SeasonPicker", "Could not get seasons")
+                recyclerView.clear()
+                errorView.text = requireContext().getString(R.string.error_message_generic)
+            } else {
+                setRecyclerViewAdapter(years)
+            }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addDivider(orientation = LinearLayoutManager.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)

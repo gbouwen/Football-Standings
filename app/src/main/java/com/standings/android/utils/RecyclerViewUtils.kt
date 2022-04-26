@@ -5,6 +5,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
+import com.standings.android.R
 import com.standings.android.adapters.BaseRecyclerViewAdapter
 import com.standings.android.adapters.RecyclerViewBindingInterface
 
@@ -20,4 +21,10 @@ fun RecyclerView.addDivider(orientation: Int, @DrawableRes drawableId: Int) {
     val divider = DividerItemDecoration(context, orientation)
     AppCompatResources.getDrawable(context, drawableId)?.let { divider.setDrawable(it) }
     addItemDecoration(divider)
+}
+
+fun RecyclerView.clear() {
+    adapter = BaseRecyclerViewAdapter(listOf(), R.layout.league_item) { _, _ ->
+
+    }
 }
