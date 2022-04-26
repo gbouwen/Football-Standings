@@ -131,6 +131,7 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
     private fun setErrorState(errorCode: Int) {
         Log.d("RetrofitError", errorCode.toString())
         recyclerView.clear()
+        errorView.visibility = View.VISIBLE
         errorView.text = requireContext().getString(R.string.error_message_http, errorCode)
     }
 

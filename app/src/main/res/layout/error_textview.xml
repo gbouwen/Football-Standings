@@ -2,7 +2,9 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/error_view"
-    android:textSize="@dimen/text_size_medium"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:text="Error message" />
+    android:textSize="@dimen/text_size_medium"
+    android:visibility="gone"
+    tools:text="Error message"
+    tools:visibility="visible" />

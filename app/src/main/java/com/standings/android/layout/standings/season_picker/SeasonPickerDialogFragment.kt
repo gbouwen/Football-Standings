@@ -43,9 +43,7 @@ class SeasonPickerDialogFragment : DialogFragment(R.layout.fragment_season_picke
 
         viewModel.years.observe(viewLifecycleOwner) { years ->
             if (years.isEmpty()) {
-                Log.d("SeasonPicker", "Could not get seasons")
-                recyclerView.clear()
-                errorView.text = requireContext().getString(R.string.error_message_generic)
+                setError()
             } else {
                 setRecyclerViewAdapter(years)
             }
@@ -64,6 +62,13 @@ class SeasonPickerDialogFragment : DialogFragment(R.layout.fragment_season_picke
                 dismiss()
             }
         }
+    }
+
+    private fun setError() {
+        Log.d("SeasonPicker", "Could not get seasons")
+        recyclerView.clear()
+        errorView.visibility = View.VISIBLE
+        errorView.text = requireContext().getString(R.string.error_message_generic)
     }
 
 }

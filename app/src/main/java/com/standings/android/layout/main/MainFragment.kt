@@ -49,9 +49,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 val allLeagues = response.body()!!
                 setRecyclerViewAdapter(allLeagues.data)
             } else {
-                Log.d("RetrofitError", response.code().toString())
-                recyclerView.clear()
-                errorView.text = requireContext().getString(R.string.error_message_http, response.code())
+                setErrorStateHTTP(response.code())
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -73,6 +71,13 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 view.findNavController().navigate(R.id.action_nav_main_to_nav_standings, bundle)
             }
         }
+    }
+
+    private fun setErrorStateHTTP(errorCode: Int) {
+        Log.d("RetrofitError", errorCode.toString())
+        recyclerView.clear()
+        errorView.visibility = View.VISIBLE
+        errorView.text = requireContext().getString(R.string.error_message_http, errorCode)
     }
 
 }
