@@ -1,61 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/single_spacing">
+        android:layout_height="@dimen/quad_spacing">
 
         <TextView
             android:id="@+id/club_rank"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/quad_spacing"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/single_spacing"
-            tools:text="1" />
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10" />
 
         <ImageView
             android:id="@+id/club_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/single_spacing"
-            android:layout_toEndOf="@id/club_rank"
-            android:adjustViewBounds="true"
-            android:maxWidth="@dimen/icon_size_small"
-            android:maxHeight="@dimen/icon_size_small"
-            android:scaleType="fitCenter"
-            android:src="@drawable/default_logo" />
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
+            android:gravity="center"
+            android:src="@drawable/default_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/club_rank"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/club_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_toEndOf="@id/club_logo"
-            tools:text="PLACEHOLDER CLUB NAME" />
+            android:layout_marginStart="@dimen/single_spacing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/club_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Central Cordoba (Santiago de Estero)" />
 
         <TextView
             android:id="@+id/club_games_played"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/quad_spacing"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/single_spacing"
-            android:layout_toStartOf="@id/club_points"
+            android:gravity="center"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/club_points"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="33" />
 
         <TextView
             android:id="@+id/club_points"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/quad_spacing"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/single_spacing"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="80" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
