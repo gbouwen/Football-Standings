@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/quad_spacing">
 
         <TextView
             android:id="@+id/club_rank"
@@ -21,14 +21,9 @@
 
         <ImageView
             android:id="@+id/club_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
+            android:layout_width="@dimen/icon_size_small"
+            android:layout_height="@dimen/icon_size_small"
             android:gravity="center"
-            android:maxWidth="@dimen/icon_size_small"
-            android:maxHeight="@dimen/icon_size_small"
-            android:minWidth="@dimen/icon_size_small"
-            android:minHeight="@dimen/icon_size_small"
             android:src="@drawable/default_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/club_rank"
