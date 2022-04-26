@@ -46,7 +46,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/league_logo"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="PLACEHOLDER LEAGUE NAME" />
+            tools:text="Liga Profesional de Futbol" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/league_season_picker"
