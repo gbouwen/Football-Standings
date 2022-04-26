@@ -9,15 +9,26 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/quad_spacing">
 
-        <TextView
-            android:id="@+id/club_rank"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/club_rank_color_holder"
             android:layout_width="@dimen/quad_spacing"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="10" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/club_rank"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center | bottom"
+                tools:text="10" />
+
+            <include layout="@layout/line" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <ImageView
             android:id="@+id/club_logo"
@@ -26,7 +37,7 @@
             android:gravity="center"
             android:src="@drawable/default_logo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/club_rank"
+            app:layout_constraintStart_toEndOf="@id/club_rank_color_holder"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

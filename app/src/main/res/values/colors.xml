@@ -8,4 +8,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="alert_blue">#00E2FF</color>
     <color name="light_grey">#D6D6D6</color>
+    <color name="rainbow_red">#FF0000</color>
+    <color name="rainbow_orange">#FF7F00</color>
+    <color name="rainbow_yellow">#FFFF00</color>
+    <color name="rainbow_green">#00FF00</color>
+    <color name="rainbow_blue">#0000FF</color>
+    <color name="rainbow_indigo">#4B0082</color>
+    <color name="rainbow_violet">#9400D3</color>
+    <color name="brown">#9E4900</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.standings.android.layout.standings
 
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -34,7 +35,8 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
     private lateinit var seasonPicker: View
     private lateinit var currentSeason: TextView
     private lateinit var leagueId: String
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var standingsRecyclerView: RecyclerView
+    private lateinit var rewardsRecyclerView: RecyclerView
     private lateinit var errorView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +53,8 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
         leagueName = view.findViewById(R.id.league_name)
         seasonPicker = view.findViewById(R.id.league_season_picker)
         currentSeason = view.findViewById(R.id.league_current_season)
-        recyclerView = view.findViewById(R.id.recycler_view_standings)
+        standingsRecyclerView = view.findViewById(R.id.recycler_view_standings)
+        rewardsRecyclerView = view.findViewById(R.id.recycler_view_rewards)
         errorView = view.findViewById(R.id.error_view)
 
         viewModel.getLeague(leagueId)
@@ -93,29 +96,44 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             }
         }
 
+        // standings recyclerView
         viewModel.allStandings.observe(viewLifecycleOwner) { response ->
             if (response.isSuccessful) {
                 val allStandings = response.body()!!
-                setRecyclerViewAdapter(allStandings.data.standings)
+                setStandingsRecyclerViewAdapter(allStandings.data.standings)
             } else {
                 setErrorState(response.code())
             }
         }
+        standingsRecyclerView.layoutManager = LinearLayoutManager(context)
+        standingsRecyclerView.addDivider(orientation = LinearLayoutManager.VERTICAL, drawableId = R.drawable.list_divider_half_horizontal)
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.addDivider(orientation = LinearLayoutManager.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)
-
+        // rewards recyclerView
+        viewModel.rewards.observe(viewLifecycleOwner) { list ->
+            Log.d("StandingsFragment", list.toString())
+            setRewardsRecyclerViewAdapter(list)
+        }
+        rewardsRecyclerView.layoutManager = LinearLayoutManager(context)
+        rewardsRecyclerView.addDivider(orientation = LinearLayoutManager.VERTICAL, drawableId = R.drawable.list_divider_single_horizontal)
     }
 
-    private fun setRecyclerViewAdapter(data: List<Standings>) {
-        recyclerView.setAdapter(data, R.layout.standing_item) { item: Standings, view: View ->
+    private fun setStandingsRecyclerViewAdapter(data: List<Standings>) {
+        standingsRecyclerView.setAdapter(data, R.layout.standing_item) { item: Standings, view: View ->
             val rank: TextView = view.findViewById(R.id.club_rank)
+            val reward: View = view.findViewById(R.id.club_reward)
             val logo: ImageView = view.findViewById(R.id.club_logo)
             val name: TextView = view.findViewById(R.id.club_name)
             val gamesPlayed: TextView = view.findViewById(R.id.club_games_played)
             val points: TextView = view.findViewById(R.id.club_points)
 
             rank.text = item.stats.find { it.name == RANK }?.value.toString()
+            if (item.reward != null) {
+                reward.visibility = View.VISIBLE
+                reward.setBackgroundColor(Color.parseColor(item.reward.color))
+
+            } else {
+                reward.visibility = View.INVISIBLE
+            }
             try {
                 putImage(requireContext(), Uri.parse(item.team?.logos?.get(0)?.link), R.drawable.default_logo, logo)
             } catch (e: Exception) {
@@ -128,9 +146,19 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
         }
     }
 
+    private fun setRewardsRecyclerViewAdapter(data: List<Standings.Reward>) {
+        rewardsRecyclerView.setAdapter(data, R.layout.reward_item) { item: Standings.Reward, view: View ->
+            val circle: ImageView = view.findViewById(R.id.reward_key)
+            val description: TextView = view.findViewById(R.id.reward_value)
+
+            circle.setColorFilter(Color.parseColor(item.color))
+            description.text = item.description
+        }
+    }
+
     private fun setErrorState(errorCode: Int) {
         Log.d("RetrofitError", errorCode.toString())
-        recyclerView.clear()
+        standingsRecyclerView.clear()
         errorView.visibility = View.VISIBLE
         errorView.text = requireContext().getString(R.string.error_message_http, errorCode)
     }
