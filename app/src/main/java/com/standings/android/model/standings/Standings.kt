@@ -4,6 +4,7 @@ import com.squareup.moshi.Json
 
 data class Standings(
     @field:Json(name = "team") val team: Team?,
+    @field:Json(name = "note") val reward: Reward?,
     @field:Json(name = "stats") val stats: List<Stats>,
 ) {
     data class Team(
@@ -14,6 +15,11 @@ data class Standings(
     ) {
         data class Logo(@field:Json(name = "href") val link: String?)
     }
+
+    data class Reward(
+        @field:Json(name = "color") val color: String,
+        @field:Json(name = "description") val description: String,
+    )
 
     data class Stats(
         @field:Json(name = "displayName") val name: String,
