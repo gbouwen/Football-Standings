@@ -9,4 +9,11 @@
     <string name="season_title">Season</string>
     <string name="error_message_http">Error: HTTP %1$d</string>
     <string name="error_message_generic">Oops, something went wrong!</string>
+    <string name="w">W</string>
+    <string name="d">D</string>
+    <string name="l">L</string>
+    <string name="f">F</string>
+    <string name="a">A</string>
+    <string name="gd">GD</string>
+    <string name="fragment_standings_rotate_explanation">Rotate device for more details</string>
 </resources>

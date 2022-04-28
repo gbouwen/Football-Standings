@@ -48,6 +48,66 @@
                 android:gravity="center"
                 android:text="@string/p"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/header_games_won"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_games_won"
+                android:layout_width="@dimen/quad_spacing"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/w"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/header_games_drawn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_games_drawn"
+                android:layout_width="@dimen/quad_spacing"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/d"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/header_games_lost"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_games_lost"
+                android:layout_width="@dimen/quad_spacing"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/l"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/header_goals_for"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_goals_for"
+                android:layout_width="@dimen/quad_spacing"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/f"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/header_goals_against"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_goals_against"
+                android:layout_width="@dimen/quad_spacing"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/a"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/header_goal_difference"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/header_goal_difference"
+                android:layout_width="@dimen/quad_spacing"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/gd"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/header_points"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,11 +149,6 @@
                 android:layout_height="wrap_content"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/reward_item" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fragment_standings_rotate_explanation"/>
 
             <include layout="@layout/error_textview" />
 

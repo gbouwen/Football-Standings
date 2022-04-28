@@ -1,5 +1,6 @@
 package com.standings.android.layout.standings
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -26,6 +27,12 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
         const val RANK = "Rank"
         const val GAMES_PLAYED = "Games Played"
         const val POINTS = "Points"
+        const val WINS = "Wins"
+        const val LOSSES = "Losses"
+        const val DRAWS = "Draws"
+        const val GOALS_FOR = "Goals For"
+        const val GOALS_AGAINST = "Goals Against"
+        const val GOAL_DIFFERENCE = "Goal Difference"
     }
 
     private lateinit var viewModel: StandingsViewModel
@@ -124,6 +131,22 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
             val name: TextView = view.findViewById(R.id.club_name)
             val gamesPlayed: TextView = view.findViewById(R.id.club_games_played)
             val points: TextView = view.findViewById(R.id.club_points)
+
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                val gamesWon: TextView = view.findViewById(R.id.club_games_won)
+                val gamesDrawn: TextView = view.findViewById(R.id.club_games_drawn)
+                val gamesLost: TextView = view.findViewById(R.id.club_games_lost)
+                val goalsFor: TextView = view.findViewById(R.id.club_goals_for)
+                val goalsAgainst: TextView = view.findViewById(R.id.club_goals_against)
+                val goalDifference: TextView = view.findViewById(R.id.club_goal_difference)
+
+                gamesWon.text = item.stats.find { it.name == WINS }?.value.toString()
+                gamesDrawn.text = item.stats.find { it.name == DRAWS }?.value.toString()
+                gamesLost.text = item.stats.find { it.name == LOSSES }?.value.toString()
+                goalsFor.text = item.stats.find { it.name == GOALS_FOR }?.value.toString()
+                goalsAgainst.text = item.stats.find { it.name == GOALS_AGAINST }?.value.toString()
+                goalDifference.text = item.stats.find { it.name == GOAL_DIFFERENCE }?.value.toString()
+            }
 
             rank.text = item.stats.find { it.name == RANK }?.value.toString()
             if (item.reward != null) {
