@@ -110,7 +110,6 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
 
         // rewards recyclerView
         viewModel.rewards.observe(viewLifecycleOwner) { list ->
-            Log.d("StandingsFragment", list.toString())
             setRewardsRecyclerViewAdapter(list)
         }
         rewardsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -147,6 +146,7 @@ class StandingsFragment : Fragment(R.layout.fragment_standings) {
     }
 
     private fun setRewardsRecyclerViewAdapter(data: List<Standings.Reward>) {
+        Log.d("Rewards", data.toString())
         rewardsRecyclerView.setAdapter(data, R.layout.reward_item) { item: Standings.Reward, view: View ->
             val circle: ImageView = view.findViewById(R.id.reward_key)
             val description: TextView = view.findViewById(R.id.reward_value)

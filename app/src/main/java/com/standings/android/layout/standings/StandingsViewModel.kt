@@ -39,7 +39,10 @@ class StandingsViewModel(private val repository: Repository) : ViewModel() {
                 rewards.value = standings.filter {
                     it.reward != null
                 }.map {
-                    it.reward!!
+                    Standings.Reward(
+                        description = it.reward!!.description.trim(),
+                        color = it.reward.color.trim()
+                    )
                 }.distinct()
             }
         }
