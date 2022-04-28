@@ -1,5 +1,5 @@
 # Football-Standings
-Android app that displays historic football standings
+Android app that displays football standings
 
 <img src="https://user-images.githubusercontent.com/57719521/165783210-cb0cb013-cfe4-438b-9107-0900e09691e7.jpeg" height=400>
 
